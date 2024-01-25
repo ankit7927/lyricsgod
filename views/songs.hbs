@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="hindi songs, hindi song lyrics, song lyrics, bollywood song lyrics">
+    {{>links}}
+    <title>World of Music - Songs</title>
+    <meta name="description" content="The one-stop destination for the most recent Hindi song lyrics.
+We provide an extensive collection of lyrics to all popular Hindi songs in one location.
+Whether you're looking for new Bollywood music, indie music, or old favourites, our website has you covered.
+Therefore, immerse yourself in the world of music and sing along with your favourite songs with our exact and up-to-date lyrics.
+Explore the magic of music with us at worldofmusic.in. ">
+</head>
+
+<body>
+    {{>nav}}
+    <main>
+        <div class="container">
+            <h1 class="h1 py-4">Latest Songs</h1>
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                {{#each songs}}
+                <div class="col h-100">
+                    <div class="bg-image ripple shadow-4-soft rounded-6 overflow-hiddend-block"
+                        data-ripple-color="light">
+                        <img src="{{this.img}}" class="w-100" alt="{{this.name}} song lyrics" />
+                        <a href="/lyric/{{this.name}}">
+                            <div class="mask">
+                                <div class="d-flex justify-content-start align-items-end h-100 p-3">
+                                    <span class="badge badge-primary me-2">{{this.name}}</span>
+                                </div>
+                            </div>
+                            <div class="hover-overlay">
+                                <div class="mask" style="background-color: hsla(0, 0%, 98.4%, 0.15)"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul  class="pagination justify-content-center pagination-sm">
+                    {{#each totalPage}}
+                    <li class="page-item"><a class="page-link" href="?page={{incPage this}}">{{incPage this}}</a></li>
+                    {{/each}}
+                </ul>
+            </nav>
+        </div>
+    </main>
+    {{>footer}}
+</body>
+
+</html>

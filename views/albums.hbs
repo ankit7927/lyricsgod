@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="hindi songs, hindi song lyrics, song lyrics, bollywood song lyrics">
+    {{>links}}
+    <title>World of Music - Albums</title>
+    <meta name="description" content="The one-stop destination for the most recent Hindi song lyrics.
+We provide an extensive collection of lyrics to all popular Hindi songs in one location.
+Whether you're looking for new Bollywood music, indie music, or old favourites, our website has you covered.
+Therefore, immerse yourself in the world of music and sing along with your favourite songs with our exact and up-to-date lyrics.
+Explore the magic of music with us at worldofmusic.in. ">
+</head>
+
+<body>
+    {{>nav}}
+    <main>
+        <div class="container">
+            <h2 class="h1 py-4">Top List of Albums</h2>
+            <div class="card">
+                <div class="card-body">
+                    <ul class="list-group list-group-light ">
+                        {{#each albums}}
+                        <a class="list-group-item list-group-item-action border-0" href="/album/{{this}}">
+                            <h5 class="card-text text-center">{{this}}</h5>
+                        </a>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    {{>footer}}
+</body>
+
+</html>

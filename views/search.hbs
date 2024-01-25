@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{>links}}
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    {{>nav}}
+    <main>
+        <div class="container">
+            <section class="search-result">
+                <h2 class="mb-4 mt-4">search result for {{query}}</h2>
+
+                <div class="card">
+                    <ul class="list-group list-group-light">
+
+                        {{#each result}}
+
+                        <li
+                            class="list-group-item px-3 list-group-item d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1"><a href="/lyric/{{this.name}}/">{{this.name}}</a></p>
+                                    <div class="badge badge-primary me-2 mb-2">
+                                        <a href="/album/{{this.album}}">
+                                            {{this.album}}
+                                        </a>
+                                    </div>
+                                    <p class="text-muted">{{this.singer}}</p>
+                                </div>
+                            </div>
+                            <img src="{{this.img}}" class="rounded-6"
+                                alt="{{this.name}} - {{this.album}}" style="width: 150px; height: 120px" />
+                        </li>
+
+                        {{/each}}
+
+
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+    {{>footer}}
+</body>
+
+</html>

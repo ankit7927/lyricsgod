@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="{{name}} lyrics, {{name}} song lyrics, {{album}} songs lyrics, {{lyrics_by}}'s songs lyrics">
+    {{>links}}
+    <title>{{name}} lyrics - {{singer}}</title>
+    <meta name="description" content="{{shortDic dic}}">
+</head>
+
+<body>
+    {{>nav}}
+    <main class="container">
+        <div class="mb-4 text-center bg-image shadow-4-strong rounded-6 mt-3"
+            style="background-image: url('{{img}}'); height: 200px;">
+            <div class="mask" style="background-color: rgba(0, 0, 0, 0.4);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class="text-white">
+                        <h2 class="mb-3 h2">{{name}} song lyrics</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-8">
+                <section>
+                    <h1 class="py-3 h1">{{title}}</h1>
+                    <small class="text-muted">Released in : {{release_date}}</small>
+                    <div class="py-3 text-center">
+                        {{{lyric}}}
+                    </div>
+                    <hr>
+                    <div>
+                        <h3 class="py-2 h3">Song description</h3>
+                        <p class="fs-6">{{dic}}</p>
+                    </div>
+                </section>
+            </div>
+            <section class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Song Information</h5>
+                        <hr />
+                        <p class="card-text"><strong>Song Name :</strong> {{name}}</p>
+                        <p class="card-text"><strong>Album :</strong> {{album}}</p>
+                        <p class="card-text"><strong>Music By :</strong> {{music_by}}</p>
+                        <p class="card-text"><strong>Lyrics By :</strong> {{lyrics_by}}</p>
+                        <p class="card-text"><strong>Singer :</strong> {{singer}}</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">More Songs from {{album}}</h5>
+                        <ul class="list-group list-group-light">
+                            {{#each more_album_song}}
+                            <a class="list-group-item list-group-item-action px-3 border-0" href="/lyric/{{this.name}}">
+                                <div>
+                                    <div class="fw-bold">{{this.name}}</div>
+                                    <div class="text-muted">{{this.singer}}</div>
+                                </div>
+                            </a>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title">More Songs By Singer</h5>
+                        <ul class="list-group list-group-light">
+                            {{#each more_by_singer}}
+                            <a class="list-group-item list-group-item-action px-3 border-0" href="/lyric/{{this.name}}">
+                                <div>
+                                    <div class="fw-bold">{{this.name}}</div>
+                                    <div class="text-muted">{{this.album}}</div>
+                                </div>
+                            </a>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    {{>footer}}
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="hindi songs, hindi song lyrics, song lyrics, bollywood song lyrics, lyrics, best lyrics">
+  {{>links}}
+  <title>World of Music</title>
+  <meta name="description" content="The one-stop destination for the most recent Hindi song lyrics.
+We provide an extensive collection of lyrics to all popular Hindi songs in one location.
+Whether you're looking for new Bollywood music, indie music, or old favourites, our website has you covered.
+Therefore, immerse yourself in the world of music and sing along with your favourite songs with our exact and up-to-date lyrics.
+Explore the magic of music with us at LyricsGOD">
+</head>
+
+<body>
+  {{>nav}}
+  <main>
+
+    <div class="container">
+      <div id="featuredsongs" class="carousel slide" data-mdb-ride="carousel">
+        <div class="carousel-inner">
+          {{#each featured}}
+          <div class="carousel-item active">
+            <div class="p-5 text-center bg-image shadow-1-strong rounded-6 mt-3" style="
+                background-image: url('{{this.img}}');
+                height: 200px;">
+              <div class="mask" style="background-color: rgba(0, 0, 0, 0.4);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                  <div class="text-white">
+                    <h1 class="mb-3 p-2">{{this.name}}</h1>
+                    <a class="btn btn-outline-light" href="/lyric/{{this.name}}/" role="button">Get Lyrics</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        <button class="carousel-control-prev" type="button" data-mdb-target="#featuredsongs" data-mdb-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-mdb-target="#featuredsongs" data-mdb-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <section class="Songs">
+        <div class="row row-cols-1 row-cols-md-2">
+          <div class="col">
+            <h2 class="mb-4 mt-4">Latest Songs</h2>
+            <ul class="list-group list-group-light">
+              {{#each latest}}
+              <li class="list-group-item border-0">
+                <div class="d-flex align-items-center">
+                  <a href="/lyric/{{this.name}}">
+                    <img src="{{this.img}}" class="rounded-6 shadow-1-soft"
+                      alt="{{this.name}} song lyrics {{this.album}} - {{this.singer}}"
+                      style="width: 180px; height: 120px" />
+                  </a>
+                  <div class="ms-3">
+                    <p class="fw-bold mb-1"><a href="/lyric/{{this.name}}/">{{this.name}}</a></p>
+                    <div class="badge badge-primary me-2 mb-2">
+                      <a href="/album/{{this.album}}">
+                        {{this.album}}
+                      </a>
+                    </div>
+                    <p class="text-muted">{{this.singer}}</p>
+                  </div>
+                </div>
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+
+          <div class="col">
+            <h2 class="mb-4 mt-4">Top Collections</h2>
+            <div class="row row-cols-1 row-cols-md-2 g-3">
+              {{#each collection}}
+              <div class="col">
+                <div class="bg-image ripple shadow-4-soft rounded-6 overflow-hiddend-block " data-ripple-color="light">
+                  <img src="{{this.img}}" class="w-100" alt="{{this.title}}" />
+                  <a href="/collection/{{this.title}}">
+                    <div class="mask">
+                      <div class="d-flex justify-content-start align-items-end h-100 p-3">
+                        <span class="badge badge-primary me-2">{{this.title}}</span>
+                      </div>
+                    </div>
+                    <div class="hover-overlay">
+                      <div class="mask" style="background-color: hsla(0, 0%, 98.4%, 0.15)"></div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              {{/each}}
+            </div>
+
+
+            <h2 class="mb-4 mt-4">Random Songs</h2>
+            <div class="row row-cols-1 row-cols-md-2 g-3">
+              {{#each randomSongs}}
+              <div class="col">
+                <div class="bg-image ripple shadow-4-soft rounded-6 overflow-hiddend-block " data-ripple-color="light">
+                  <img src="{{this.img}}" class="w-100" alt="{{this.name}} song lyrics" />
+                  <a href="/lyric/{{this.name}}">
+                    <div class="mask">
+                      <div class="d-flex justify-content-start align-items-end h-100 p-3">
+                        <span class="badge badge-primary me-2">{{this.name}}</span>
+                      </div>
+                    </div>
+                    <div class="hover-overlay">
+                      <div class="mask" style="background-color: hsla(0, 0%, 98.4%, 0.15)"></div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  {{>footer}}
+</body>
+
+</html>
