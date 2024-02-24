@@ -30,7 +30,8 @@ privateController.getAll = asyncHandler(async (req, res) => {
 })
 
 privateController.getSongByID = asyncHandler(async (req, res) => {
-    res.send(await SongLyric.findOne({ _id: req.params.songID }))
+    const song = await SongLyric.findOne({ _id: req.params.songID }).lean();
+    res.json(song)
 })
 
 

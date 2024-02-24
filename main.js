@@ -31,6 +31,7 @@ app.set('view engine', 'hbs')
 hbs.registerPartials(path.join(__dirname, "views/partials"))
 
 app.use("", require("./routes/publicRoute"))
+app.use("/api", require("./routes/publicRoute"))
 app.use("/private", require("./routes/privateRoute"))
 
 app.use("*", (req, res) => {

@@ -24,7 +24,8 @@ publicController.index = asyncHandler(async (req, res) => {
         { $project: { "name": 1, "img": 1 } }
     ])
 
-    res.render("index", data)
+    if(req.originalUrl.includes("api")) res.json(data)
+    else res.render("index", data)
 })
 
 
@@ -46,8 +47,8 @@ publicController.songByName = asyncHandler(async (req, res) => {
     songData.more_album_song = await SongLyric.find({ album: songData.album })
         .select("name singer").limit(7).lean().exec()
 
-
-    res.render("song", songData)
+    if(req.originalUrl.includes("api")) res.json(songData)
+    else res.render("song", songData)
 })
 
 
@@ -89,7 +90,8 @@ publicController.search = asyncHandler(async (req, res) => {
 
     result.query = songQuery
 
-    res.render("search", result)
+    if(req.originalUrl.includes("api")) res.json(result)
+    else res.render("search", result)
 })
 
 
@@ -106,7 +108,9 @@ publicController.collection = asyncHandler(async (req, res) => {
     const count = await CollectionModel.countDocuments();
     response.totalPage = [...Array(Math.ceil(count / limit)).keys()]
     response.currentPage = page
-    res.render("collections", response)
+
+    if(req.originalUrl.includes("api")) res.json(response)
+    else res.render("collections", response)
 })
 
 
@@ -128,7 +132,8 @@ publicController.songs = asyncHandler(async (req, res) => {
     result.totalPage = [...Array(Math.ceil(count / limit)).keys()]
     result.currentPage = page
 
-    res.render("songs", result)
+    if(req.originalUrl.includes("api")) res.json(result)
+    else res.render("songs", result)
 })
 
 
@@ -141,7 +146,8 @@ publicController.albums = asyncHandler(async (req, res) => {
         .distinct("album")
         .lean()
 
-    res.render("albums", result)
+    if(req.originalUrl.includes("api")) res.json(result);
+    else res.render("albums", result)
 })
 
 publicController.albumSong = asyncHandler(async (req, res) => {
@@ -151,7 +157,9 @@ publicController.albumSong = asyncHandler(async (req, res) => {
     response.albumSongs = await SongLyric.find({ album: albumName })
         .select("name img singer release_date")
         .lean().exec()
-    res.render("albumSongs", response)
+
+    if(req.originalUrl.includes("api")) res.json(response);
+    else res.render("albumSongs", response)
 })
 
 publicController.collectionSongs = asyncHandler(async (req, res) => {
@@ -173,7 +181,9 @@ publicController.collectionSongs = asyncHandler(async (req, res) => {
     const count = response.collection.songs.length()
     response.totalPage = [...Array(Math.ceil(count / limit)).keys()]
     response.currentPage = page
-    res.render("collectionSongs", response)
+
+    if (req.originalUrl.includes("api")) res.json(response);
+    else res.render("collectionSongs", response)
 })
 
 module.exports = publicController;
