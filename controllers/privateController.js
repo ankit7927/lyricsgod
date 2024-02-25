@@ -5,16 +5,20 @@ const SongLyric = require("../model/SongLyric");
 const privateController = {}
 
 privateController.addSong = asyncHandler(async (req, res) => {
-    const songDetail = { name, singer, music_by, lyrics_by, lyric, album, release_date, dic, title, category } = req.body;
+    const songDetail = { name, singer, music_by, lyrics_by, lyric, album, release_date, title, category } = req.body;
 
-    if (!name || !singer || !music_by || !lyric || !lyrics_by || !album || !release_date)
-        return res.status(400).json({ message: "all fields required" })
+    if (!name || !lyric )
+        return res.status(400).json({ message: "name and lyrics is required" })
 
     const exist = await SongLyric.findOne({ name: name }).lean().exec()
 
     if (exist) return res.status(400).json({ message: 'song alredy exist' });
 
-    if (!title) songDetail.title = name + " song lyrics by " + singer + " - " + album
+    if (!title) {
+        let title = name  + "lyrics";
+        if (singer) title + "by " + singer;
+        if (album) title + `- ${album}`;
+    }
 
     songDetail.img = `${req.protocol}://${req.headers.host}/images/${req.file.originalname}`;
     songDetail.release_date = new Date(release_date).toLocaleDateString()
@@ -36,7 +40,7 @@ privateController.getSongByID = asyncHandler(async (req, res) => {
 
 
 privateController.updateSong = asyncHandler(async (req, res) => {
-    const { songID, name, singer, music_by, lyrics_by, lyric, album, release_date, dic, title, category } = req.body;
+    const { songID, name, singer, music_by, lyrics_by, lyric, album, release_date, title, category } = req.body;
 
     if (!songID) return res.status(400).json({ message: 'songID is required' });
 
@@ -51,7 +55,6 @@ privateController.updateSong = asyncHandler(async (req, res) => {
     existingSong.lyric = lyric || existingSong.lyric
     existingSong.album = album || existingSong.album
     existingSong.release_date = release_date || existingSong.release_date
-    existingSong.dic = dic || existingSong.dic
     existingSong.title = title || existingSong.title
     existingSong.category = category || existingSong.category
     existingSong.img = `${req.protocol}://${req.headers.host}/images/${req.file.originalname}` || existingSong.img

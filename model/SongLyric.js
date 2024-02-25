@@ -5,34 +5,18 @@ const SongLyric = mongoose.Schema({
         type: String,
         required: true
     },
-    singer: {
-        type: String,
-        required: true
-    },
-    music_by: {
-        type: String,
-        required: true
-    },
-    lyrics_by: {
-        type: String,
-        required: true
-    },
+    singer: String,
+    music_by: String,
+    lyrics_by: String,
     lyric: {
         type: String,
         required: true
     },
-    album: {
-        type: String,
-        required: true
-    },
+    album: String,
     title: String,
-    dic: String,
-    category:String,
-    img:String,
-    release_date: {
-        type: Date,
-        required: true
-    }
+    category: String,
+    img: String,
+    release_date: Date
 })
 
 module.exports = mongoose.model("SongLyric", SongLyric)

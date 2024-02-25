@@ -76,11 +76,6 @@ publicController.search = asyncHandler(async (req, res) => {
                 }
             },
             {
-                "dic": {
-                    $regex: songQuery
-                }
-            },
-            {
                 "lyric": {
                     $regex: songQuery
                 }
