@@ -3,7 +3,7 @@ const CollectionModel = require("../model/CollectionModel");
 const SongLyric = require("../model/SongLyric");
 const publicController = {}
 
-publicController.index = asyncHandler(async (req, res) => {
+publicController.index = async (req, res) => {
     let data = {}
 
     data.featured = await SongLyric.aggregate([
@@ -26,10 +26,10 @@ publicController.index = asyncHandler(async (req, res) => {
 
     if(req.originalUrl.includes("api")) res.json(data)
     else res.render("index", data)
-})
+}
 
 
-publicController.songByName = asyncHandler(async (req, res) => {
+publicController.songByName = async (req, res) => {
 
     let songData = {}
     songData = await SongLyric.findOne({ name: req.params.songName }).lean().exec()
@@ -49,10 +49,10 @@ publicController.songByName = asyncHandler(async (req, res) => {
 
     if(req.originalUrl.includes("api")) res.json(songData)
     else res.render("song", songData)
-})
+}
 
 
-publicController.search = asyncHandler(async (req, res) => {
+publicController.search = async (req, res) => {
 
     const { songQuery } = req.query;
 
@@ -87,10 +87,10 @@ publicController.search = asyncHandler(async (req, res) => {
 
     if(req.originalUrl.includes("api")) res.json(result)
     else res.render("search", result)
-})
+}
 
 
-publicController.collection = asyncHandler(async (req, res) => {
+publicController.collection = async (req, res) => {
     const { page = 1 } = req.query;
     const limit = 20;
 
@@ -106,10 +106,10 @@ publicController.collection = asyncHandler(async (req, res) => {
 
     if(req.originalUrl.includes("api")) res.json(response)
     else res.render("collections", response)
-})
+}
 
 
-publicController.songs = asyncHandler(async (req, res) => {
+publicController.songs = async (req, res) => {
     const { page = 1 } = req.query;
     const limit = 40;
 
@@ -129,10 +129,10 @@ publicController.songs = asyncHandler(async (req, res) => {
 
     if(req.originalUrl.includes("api")) res.json(result)
     else res.render("songs", result)
-})
+}
 
 
-publicController.albums = asyncHandler(async (req, res) => {
+publicController.albums = async (req, res) => {
     const result = {}
 
     result.albums = await SongLyric.find()
@@ -143,9 +143,9 @@ publicController.albums = asyncHandler(async (req, res) => {
 
     if(req.originalUrl.includes("api")) res.json(result);
     else res.render("albums", result)
-})
+}
 
-publicController.albumSong = asyncHandler(async (req, res) => {
+publicController.albumSong = async (req, res) => {
     const albumName = req.params.albumName;
     const response = {}
     response.title = albumName
@@ -155,9 +155,9 @@ publicController.albumSong = asyncHandler(async (req, res) => {
 
     if(req.originalUrl.includes("api")) res.json(response);
     else res.render("albumSongs", response)
-})
+}
 
-publicController.collectionSongs = asyncHandler(async (req, res) => {
+publicController.collectionSongs = async (req, res) => {
     const { page = 1 } = req.query;
     const limit = 40;
     const collName = req.params.collName;
@@ -179,6 +179,6 @@ publicController.collectionSongs = asyncHandler(async (req, res) => {
 
     if (req.originalUrl.includes("api")) res.json(response);
     else res.render("collectionSongs", response)
-})
+}
 
 module.exports = publicController;

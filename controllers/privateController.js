@@ -4,7 +4,7 @@ const SongLyric = require("../model/SongLyric");
 
 const privateController = {}
 
-privateController.addSong = asyncHandler(async (req, res) => {
+privateController.addSong = async (req, res) => {
     const songDetail = { name, singer, music_by, lyrics_by, lyric, album, release_date, title, category } = req.body;
 
     if (!name || !lyric )
@@ -27,19 +27,19 @@ privateController.addSong = asyncHandler(async (req, res) => {
 
     if (newSong) res.status(201).json({ message: "song created" })
     else res.status(400).json({ message: "invalid song data received" })
-})
+}
 
-privateController.getAll = asyncHandler(async (req, res) => {
+privateController.getAll = async (req, res) => {
     res.send(await SongLyric.find())
-})
+}
 
-privateController.getSongByID = asyncHandler(async (req, res) => {
+privateController.getSongByID = async (req, res) => {
     const song = await SongLyric.findOne({ _id: req.params.songID }).lean();
     res.json(song)
-})
+}
 
 
-privateController.updateSong = asyncHandler(async (req, res) => {
+privateController.updateSong = async (req, res) => {
     const { songID, name, singer, music_by, lyrics_by, lyric, album, release_date, title, category } = req.body;
 
     if (!songID) return res.status(400).json({ message: 'songID is required' });
@@ -62,9 +62,9 @@ privateController.updateSong = asyncHandler(async (req, res) => {
     const updatedSong = await existingSong.save()
 
     res.json(updatedSong)
-})
+}
 
-privateController.deleteSong = asyncHandler(async (req, res) => {
+privateController.deleteSong = async (req, res) => {
     const { songID } = req.body;
 
     if (!songID) return res.status(400).json({ message: 'songID is required' });
@@ -72,9 +72,9 @@ privateController.deleteSong = asyncHandler(async (req, res) => {
     const red = await SongLyric.deleteOne({ _id: songID })
 
     res.send(red)
-})
+}
 
-privateController.createCollection = asyncHandler(async (req, res) => {
+privateController.createCollection = async (req, res) => {
     let collDetail = { title, dic } = req.body;
     if (!title || !dic) return res.status(400).json({ message: "all fields required" })
 
@@ -88,10 +88,10 @@ privateController.createCollection = asyncHandler(async (req, res) => {
 
     if (newColl) res.status(201).json({ message: "song created" })
     else res.status(400).json({ message: "invalid collection data received" })
-})
+}
 
 
-privateController.updateCollection = asyncHandler(async (req, res) => {
+privateController.updateCollection = async (req, res) => {
     const { collID, title, dic } = req.body;
 
     if (!title || !dic || !collID) return res.status(400).json({ message: "all fields required" })
@@ -107,26 +107,26 @@ privateController.updateCollection = asyncHandler(async (req, res) => {
     const updateColl = await exist.save()
 
     res.json(updateColl)
-})
+}
 
-privateController.getAllColl = asyncHandler(async (req, res) => {
+privateController.getAllColl = async (req, res) => {
     res.send(await CollectionModel.find())
-})
+}
 
-privateController.getCollByID = asyncHandler(async (req, res) => {
+privateController.getCollByID = async (req, res) => {
     const coll = await CollectionModel.findOne({ _id: req.params.collID })
     if (coll === null) return res.status(400).json({ message: "collection not found" })
     res.send(coll)
-})
+}
 
-privateController.deleteColl = asyncHandler(async (req, res) => {
+privateController.deleteColl = async (req, res) => {
     const red = await CollectionModel.deleteOne({ _id: req.params.collID })
 
     res.send(red)
-})
+}
 
 
-privateController.addSongToColl = asyncHandler(async (req, res) => {
+privateController.addSongToColl = async (req, res) => {
     const { collID, songNames } = req.body;
 
     const exist = await CollectionModel.findOne({ _id: collID }).select("songs").exec()
@@ -150,9 +150,9 @@ privateController.addSongToColl = asyncHandler(async (req, res) => {
     const updated = await exist.save()
 
     res.json(updated)
-})
+}
 
-privateController.removeSongFromColl = asyncHandler(async (req, res) => {
+privateController.removeSongFromColl = async (req, res) => {
     const { collID, songNames } = req.body;
 
     let exist = await CollectionModel.findOne({ _id: collID }).select("songs").exec()
@@ -166,6 +166,6 @@ privateController.removeSongFromColl = asyncHandler(async (req, res) => {
     const update = await exist.save()
 
     res.json(update)
-})
+}
 
 module.exports = privateController;
